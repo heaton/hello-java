@@ -33,4 +33,9 @@ public class GivenNumber {
     return count;
   }
 
+  @Override
+  public String toString() {
+    return givenNumber;
+  }
+
 }

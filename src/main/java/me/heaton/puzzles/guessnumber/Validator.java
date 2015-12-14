@@ -1,10 +1,13 @@
 package me.heaton.puzzles.guessnumber;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
 import static me.heaton.puzzles.guessnumber.GuessNumber.LENGTH_OF_NUMBER;
 
+@Component
 public class Validator {
 
   public boolean isWrong(String input) {

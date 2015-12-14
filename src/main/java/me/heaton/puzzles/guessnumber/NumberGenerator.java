@@ -1,15 +1,19 @@
 package me.heaton.puzzles.guessnumber;
 
 import com.google.common.base.Joiner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+@Component
 public class NumberGenerator {
 
   private final Random random;
 
+  @Autowired
   public NumberGenerator(Random random) {
     this.random = random;
   }

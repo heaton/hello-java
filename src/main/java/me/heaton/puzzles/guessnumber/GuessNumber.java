@@ -1,9 +1,13 @@
 package me.heaton.puzzles.guessnumber;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+@Component
 public class GuessNumber {
 
   public final static int LENGTH_OF_NUMBER = 4;
@@ -17,6 +21,7 @@ public class GuessNumber {
   private int inputCount = 0;
   private boolean over = false;
 
+  @Autowired
   public GuessNumber(NumberGenerator numberGenerator, Validator validator) {
     this.givenNumber = numberGenerator.unique(LENGTH_OF_NUMBER);
     this.validator = validator;
@@ -37,7 +42,7 @@ public class GuessNumber {
 
   private String conclusion(boolean isWin) {
     over = isWin || isEnd();
-    return isWin ? "\nyou won!" : isEnd() ? "\nyou lost!" : "";
+    return isWin ? "\nyou won!" : isEnd() ? "\nyou lost! The number is " + givenNumber : "";
   }
 
   private boolean isEnd() {
