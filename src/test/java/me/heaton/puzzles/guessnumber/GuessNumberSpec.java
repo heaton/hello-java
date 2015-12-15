@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.*;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -36,7 +37,7 @@ public class GuessNumberSpec {
   @Test
   public void when_input_6_times_without_right_answer_then_it_should_tell_you_lost() {
     input("5678", 5);
-    assertThat(guessNumber.guess("5678"), is("0A0B\nyou lost!"));
+    assertThat(guessNumber.guess("5678"), containsString("0A0B\nyou lost!"));
   }
 
   @Test
