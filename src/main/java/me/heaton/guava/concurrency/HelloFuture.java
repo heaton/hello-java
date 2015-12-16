@@ -1,5 +1,6 @@
 package me.heaton.guava.concurrency;
 
+import com.google.common.base.Objects;
 import com.google.common.util.concurrent.*;
 import com.google.gson.Gson;
 
@@ -62,12 +63,12 @@ class TransferSomeData implements Callable<Result> {
     return new FutureCallback<Result>() {
       @Override
       public void onSuccess(Result result) {
-        log.printf("send back to %s with %s\n", sendBack, result);
+        log.println(String.format("send back to %s with %s", sendBack, result));
       }
 
       @Override
       public void onFailure(Throwable t) {
-        log.printf("log the error that %s\n", t.getMessage());
+        log.println(String.format("log the error that %s", t.getMessage()));
         t.printStackTrace();
       }
     };
@@ -88,6 +89,20 @@ class Result {
   @Override
   public String toString() {
     return "the message of " + id + " " + message;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Result result = (Result) o;
+    return id == result.id &&
+        Objects.equal(message, result.message);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id, message);
   }
 
 }
