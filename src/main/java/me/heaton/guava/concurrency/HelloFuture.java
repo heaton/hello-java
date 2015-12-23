@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import java.io.PrintStream;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class HelloFuture {
 
@@ -18,6 +19,12 @@ public class HelloFuture {
     TransferSomeData task2 = new TransferSomeData("wrong json format", "Heaton", gson, 500, System.out);
     taskManager.run(task1, task1.callback());
     taskManager.run(task2, task1.callback());
+
+    try {
+      service.awaitTermination(2, TimeUnit.SECONDS);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
 }
