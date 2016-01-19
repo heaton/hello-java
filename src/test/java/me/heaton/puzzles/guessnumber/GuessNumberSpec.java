@@ -2,6 +2,10 @@ package me.heaton.puzzles.guessnumber;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.*;
 
@@ -10,17 +14,19 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class GuessNumberSpec {
 
   private GuessNumber guessNumber;
+
+  @Mock
+  private NumberGenerator numberGenerator;
+  @Mock
   private Validator validator;
 
   @Before
   public void given_the_special_number_1234() {
-    NumberGenerator numberGenerator = mock(NumberGenerator.class);
     when(numberGenerator.unique(4)).thenReturn(new GivenNumber("1234"));
-    validator = mock(Validator.class);
-
     guessNumber = new GuessNumber(numberGenerator, validator);
   }
 
